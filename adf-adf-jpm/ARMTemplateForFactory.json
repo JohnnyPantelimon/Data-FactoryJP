@@ -24,13 +24,13 @@
 			"type": "string",
 			"defaultValue": "https://akv-jpm.vault.azure.net/"
 		},
-		"ls_adls_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsgen2jpm.dfs.core.windows.net/"
-		},
 		"ls_azuredatabricks_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "0224-225018-rrdyv5ty"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2jpm.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -161,6 +161,60 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "bronzeTOsilver",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/ionut.pantelimon@yahoo.com/bronzeTOsilver"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_azuredatabricks",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Notebook2",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "bronzeTOsilver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/ionut.pantelimon@yahoo.com/silverTOgold"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_azuredatabricks",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -177,6 +231,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_onprem_sqlserver')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_azuredatabricks')]",
 				"[concat(variables('factoryId'), '/datasets/ds_onprem_table')]",
 				"[concat(variables('factoryId'), '/datasets/ds_adls_file_name')]"
 			]
@@ -332,23 +387,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_adls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('ls_adls_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('ls_adls_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ls_azuredatabricks')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -371,6 +409,23 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/akv_jpm')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_adls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_adls_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('ls_adls_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_onprem_sqlserver')]",

@@ -390,6 +390,60 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "bronzeTOsilver",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/ionut.pantelimon@yahoo.com/bronzeTOsilver"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_azuredatabricks",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Notebook2",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "bronzeTOsilver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/ionut.pantelimon@yahoo.com/silverTOgold"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_azuredatabricks",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -406,6 +460,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_onprem_sqlserver')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_azuredatabricks')]",
 				"[concat(variables('factoryId'), '/datasets/ds_onprem_table')]",
 				"[concat(variables('factoryId'), '/datasets/ds_adls_file_name')]"
 			]

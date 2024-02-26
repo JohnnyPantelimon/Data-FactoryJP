@@ -17,11 +17,11 @@
 		"akv_jpm_properties_typeProperties_baseUrl": {
 			"value": "https://akv-jpm.vault.azure.net/"
 		},
-		"ls_adls_properties_typeProperties_url": {
-			"value": "https://adlsgen2jpm.dfs.core.windows.net/"
-		},
 		"ls_azuredatabricks_properties_typeProperties_existingClusterId": {
 			"value": "0224-225018-rrdyv5ty"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://adlsgen2jpm.dfs.core.windows.net/"
 		}
 	}
 }
