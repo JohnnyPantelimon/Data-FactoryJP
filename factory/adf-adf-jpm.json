@@ -1,0 +1,9 @@
+{
+	"name": "adf-adf-jpm",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "146caaaf-4223-442f-8927-74979da91d07",
+		"tenantId": "9eafc177-552f-407a-a74f-be8d3198a3a5"
+	}
+}

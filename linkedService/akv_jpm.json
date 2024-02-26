@@ -1,0 +1,11 @@
+{
+	"name": "akv_jpm",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://akv-jpm.vault.azure.net/"
+		}
+	}
+}

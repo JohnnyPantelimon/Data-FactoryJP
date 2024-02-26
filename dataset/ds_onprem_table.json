@@ -1,0 +1,25 @@
+{
+	"name": "ds_onprem_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onprem_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"onpremTblName": {
+				"type": "string"
+			},
+			"onpremSchemaName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Address"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

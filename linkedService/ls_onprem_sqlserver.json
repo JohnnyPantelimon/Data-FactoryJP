@@ -1,0 +1,23 @@
+{
+	"name": "ls_onprem_sqlserver",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=DESKTOP-12QVURP;Initial Catalog=AdventureWorksLT2017;User ID=johnnyBoy",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "akv_jpm",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "onprem-sql-password"
+			}
+		},
+		"connectVia": {
+			"referenceName": "selfHosteIntegration",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
