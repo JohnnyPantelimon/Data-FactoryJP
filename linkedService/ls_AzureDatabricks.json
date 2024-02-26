@@ -1,0 +1,19 @@
+{
+	"name": "ls_AzureDatabricks",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-8551866498735283.3.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "akv_jpm",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "azuretoken"
+			},
+			"existingClusterId": "0224-225018-rrdyv5ty"
+		}
+	}
+}
