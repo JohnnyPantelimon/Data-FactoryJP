@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-adf-jpm"
+		},
+		"ls_adls_accountKey": {
+			"value": ""
+		},
+		"ls_onprem_sqlserver_connectionString": {
+			"value": "Integrated Security=False;Data Source=DESKTOP-12QVURP;Initial Catalog=AdventureWorksLT2017;User ID=johnnyBoy"
+		},
+		"LS_AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://datafactorykeyvaultjp.vault.azure.net/"
+		},
+		"akv_jpm_properties_typeProperties_baseUrl": {
+			"value": "https://akv-jpm.vault.azure.net/"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://adlsgen2jpm.dfs.core.windows.net/"
+		},
+		"ls_azuredatabricks_properties_typeProperties_existingClusterId": {
+			"value": "0224-225018-rrdyv5ty"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
